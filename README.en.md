@@ -1,6 +1,98 @@
-<!-- markdownlint-disable MD028 MD033 MD045 -->
+<div align="center">
 
 # reinstall
+
+**Rebuild systems, keep the steps visible.**
+
+![Shell](https://img.shields.io/badge/Stack-Shell-3178C6?style=flat-square)
+![Windows](https://img.shields.io/badge/Stack-Windows-339933?style=flat-square)
+![Linux](https://img.shields.io/badge/Stack-Linux-8A2BE2?style=flat-square)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square)](LICENSE)
+
+<p align="center">
+  <a href="#features">Key Features</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#workflow">Workflow</a> •
+  <a href="#structure">Project Structure</a> •
+  <a href="#documentation">Documentation</a>
+</p>
+
+[English](README.en.md) · [简体中文](README.md)
+
+[Repository](https://github.com/langesmesser/reinstall)
+
+</div>
+
+---
+
+<a name="overview"></a>
+
+## Overview
+
+A server and VPS reinstallation script for Linux installation, disk image writing, Windows ISO installation and Alpine or netboot.xyz rescue environments.
+
+This repository is a fork of [bin456789/reinstall](https://github.com/bin456789/reinstall). The branch's existing guides and author credits are retained; upstream releases are distinct from this branch's build artifacts.
+
+> Reinstallation or image writing overwrites target disk data. Back up first and confirm console or rescue access; OpenVZ and LXC are unsupported.
+
+---
+
+<a name="features"></a>
+
+## Key Features
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Cross-system installation</h3>
+      <p>Use the documented installation paths between Linux and Windows.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>Network adaptation</h3>
+      <p>Review dynamic and static networking, IPv6 and special gateway handling.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Images and drivers</h3>
+      <p>Use disk images, Windows ISOs and documented driver installation paths.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>Rescue and observation</h3>
+      <p>Use Alpine, netboot.xyz, SSH, VNC or serial consoles to observe and recover installations.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+<a name="workflow"></a>
+
+## Workflow
+
+```mermaid
+flowchart LR
+    n0["Select target system"] --> n1
+    n1["Validate requirements and back up"] --> n2
+    n2["Download installation resources"] --> n3
+    n3["Reboot into installer"] --> n4
+    n4["Install and reconnect"]
+```
+
+---
+
+<a name="quick-start"></a>
+
+## Quick Start
+
+Choose the path below that matches your system, client or deployment. Installation and release links follow this branch’s existing documentation.
+
+<a name="usage-guide"></a>
+
+## Complete Usage Guide
+
+<!-- markdownlint-disable MD028 MD033 MD045 -->
+
 
 [![Codacy](https://img.shields.io/codacy/grade/dc679a17751448628fe6d8ac35e26eed?logo=Codacy&label=Codacy&style=flat-square)](https://app.codacy.com/gh/bin456789/reinstall/dashboard)
 [![CodeFactor](https://img.shields.io/codefactor/grade/github/bin456789/reinstall?logo=CodeFactor&logoColor=white&label=CodeFactor&style=flat-square)](https://www.codefactor.io/repository/github/bin456789/reinstall)
@@ -12,7 +104,7 @@ One-Click Script to Reinstall System [中文](README.md)
 
 ![Sponsors](https://raw.githubusercontent.com/bin456789/sponsors/refs/heads/master/sponsors.svg)
 
-## Highlights
+### Highlights
 
 - One-click Linux installation: Supports 17 common distributions.
 - One-click Windows installation: Uses the official ISO for installation instead of custom images. The script automatically retrieves the ISO link and installs `Virtio` and other drivers.
@@ -24,7 +116,7 @@ One-Click Script to Reinstall System [中文](README.md)
 - No homemades image included, all resources are obtained in real-time from mirror sites
 - Includes many comments.
 
-## System Requirements
+### System Requirements
 
 The original system can be any system listed in the table.
 
@@ -60,7 +152,7 @@ The system requirements for the target system are as follows:
 >
 > Please use <https://github.com/LloydAsp/OsMutation> instead.
 
-## Download (Current system is <img width="20" height="20" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux)
+### Download (Current system is <img width="20" height="20" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux)
 
 For server outside China:
 
@@ -74,7 +166,7 @@ For server inside China:
 curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
 ```
 
-## Download (Current system is <img width="20" height="20" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows)
+### Download (Current system is <img width="20" height="20" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows)
 
 > [!IMPORTANT]
 > Before proceeding, please disable the 'Real-time protection' feature in `Windows Defender`. This feature may prevent `certutil` from downloading any files.
@@ -83,7 +175,7 @@ curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reins
 
 <summary>😢Still unable to download?</summary>
 
-### Try the following methods
+#### Try the following methods
 
 1. For Windows 7, install this patch to enable TLS 1.2.
 
@@ -116,14 +208,14 @@ For server inside China:
 certutil -urlcache -f -split https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.bat
 ```
 
-## Usage
+### Usage
 
 **All features** can be used on both Linux and Windows.
 
 - on Linux, execute `bash reinstall.sh`
 - on Windows, execute `.\reinstall.bat`
 
-### Feature 1: Install <img width="16" height="16" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux
+#### Feature 1: Install <img width="16" height="16" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux
 
 - The username is `root` with a default password of `123@@@`. It may take a few minutes after the first boot to successfully log in.
 - When installing the latest version, the version number does not need to be specified.
@@ -152,7 +244,7 @@ bash reinstall.sh centos      9
                   gentoo
 ```
 
-#### Optional Parameters
+##### Optional Parameters
 
 - `--password PASSWORD` Set the password
 - `--ssh-port PORT` Change the SSH port (for log observation during installation and for the new system)
@@ -197,7 +289,7 @@ bash reinstall.sh ubuntu --installer
 
 </details>
 
-### Feature 2: DD
+#### Feature 2: DD
 
 - Supports `raw` and `vhd` image formats (either uncompressed or compressed as `.gz`, `.xz`, `.zst`, `.tar`, `.tar.gz`, `.tar.xz`, `.tar.zst`).
 - When deploy a Windows image, the system disk will be automatically expanded, and machines with a static IP will have their IP configured, and may take a few minutes after the first boot for the configuration to take effect.
@@ -207,7 +299,7 @@ bash reinstall.sh ubuntu --installer
 bash reinstall.sh dd --img https://example.com/xxx.xz
 ```
 
-#### Optional parameters
+##### Optional parameters
 
 - `--allow-ping` Allow ping responses (DD Windows only)
 - `--rdp-port PORT` Change RDP port (DD Windows only)
@@ -219,7 +311,7 @@ bash reinstall.sh dd --img https://example.com/xxx.xz
 > Can monitor the progress through various methods (SSH, HTTP 80 port, VNC in the background, serial console).
 > <br />Even if errors occur during the installation process, you can still install to Alpine via SSH by running `/trans.sh alpine`
 
-### Feature 3: Reboot to <img width="16" height="16" src="https://www.alpinelinux.org/alpine-logo.ico" /> Alpine Rescue System (Live OS)
+#### Feature 3: Reboot to <img width="16" height="16" src="https://www.alpinelinux.org/alpine-logo.ico" /> Alpine Rescue System (Live OS)
 
 - You can use SSH to backup/restore disk, manually perform DD operations, modify partitions, and manually install Alpine, Arch, Gentoo, and other systems.
 - Username `root`, Default password `123@@@`
@@ -229,12 +321,12 @@ bash reinstall.sh dd --img https://example.com/xxx.xz
 bash reinstall.sh alpine --hold=1
 ```
 
-#### Optional parameters
+##### Optional parameters
 
 - `--password PASSWORD` Set password
 - `--ssh-port PORT` Change SSH port
 
-### Feature 4: Reboot to <img width="16" height="16" src="https://netboot.xyz/img/favicon.ico" /> netboot.xyz
+#### Feature 4: Reboot to <img width="16" height="16" src="https://netboot.xyz/img/favicon.ico" /> netboot.xyz
 
 - Can manually install [more systems](https://github.com/netbootxyz/netboot.xyz?tab=readme-ov-file#what-operating-systems-are-currently-available-on-netbootxyz) using vendor backend VNC.
 - If manual operations do not damage the original system, rebooting will return to the original system.
@@ -245,7 +337,7 @@ bash reinstall.sh netboot.xyz
 
 ![netboot.xyz](https://netboot.xyz/images/netboot.xyz.gif)
 
-### Feature 5: Install <img width="16" height="16" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows ISO
+#### Feature 5: Install <img width="16" height="16" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows ISO
 
 ![Windows Installation](https://github.com/bin456789/reinstall/assets/7548515/07c1aea2-1ce3-4967-904f-aaf9d6eec3f7)
 
@@ -254,7 +346,7 @@ bash reinstall.sh netboot.xyz
 - The machine with a static IP will automatically configure the IP. It may take a few minutes to take effect on the first boot.
 - Supports all languages.
 
-#### Supported Systems
+##### Supported Systems
 
 - Windows (Vista ~ 11)
 - Windows Server (2008 ~ 2025)
@@ -263,7 +355,7 @@ bash reinstall.sh netboot.xyz
   - Hyper-V Server \*
   - Azure Stack HCI \*
 
-#### Method 1: Let the Script Automatically Search for ISO (Recommended)
+##### Method 1: Let the Script Automatically Search for ISO (Recommended)
 
 - Typically, Windows releases new official ISOs every month, which integrate the latest system patches, avoiding the need to download a bunch of updates right after installation.
 - The script will search for ISOs from <https://massgrave.dev/genuine-installation-media>, a site that collects monthly released ISOs, ensuring that the ISOs found by the script are the official latest versions.
@@ -322,7 +414,7 @@ zh-tw
 
 </details>
 
-#### Method 2: Specify the ISO link manually
+##### Method 2: Specify the ISO link manually
 
 - If you don't know the `--image-name`, you can enter any value. After rebooting, connect via SSH and re-enter the correct value based on the error messages.
 
@@ -351,7 +443,7 @@ bash reinstall.sh windows \
 
 </details>
 
-#### Optional parameters
+##### Optional parameters
 
 - `--password PASSWORD` Set Password
 - `--allow-ping` Allow ping responses
@@ -360,7 +452,7 @@ bash reinstall.sh windows \
 - `--web-port PORT` Change Web port (for log observation during installation)
 - `--hold 2` Allow SSH connections for modifying the disk content before rebooting into the official Windows installation program, with the disk mounted at `/os`.
 
-#### How to Specify the Image Name `--image-name`
+##### How to Specify the Image Name `--image-name`
 
 Typically, an ISO will contain multiple system versions, such as Home Edition and Professional Edition. The image name `--image-name` is used to specify the version to be installed, and it is case-insensitive when entered.
 
@@ -375,13 +467,13 @@ Windows 11 Enterprise LTSC 2024
 Windows Server 2025 SERVERDATACENTER
 ```
 
-#### How to Use [DISM++](https://github.com/Chuyu-Team/Dism-Multi-language/releases) to Query the Image Names Included in the ISO
+##### How to Use [DISM++](https://github.com/Chuyu-Team/Dism-Multi-language/releases) to Query the Image Names Included in the ISO
 
 Open File menu > Open Image File, select the iso to be installed to get the image name (full system name), and all available image names are installable.
 
 ![image-name](https://github.com/bin456789/reinstall/assets/7548515/5aae0a9b-61e2-4f66-bb98-d470a6beaac2)
 
-#### The script will install the following drivers as needed
+##### The script will install the following drivers as needed
 
 - Virtio ([Virtio](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/), [Alibaba Cloud](https://www.alibabacloud.com/help/ecs/user-guide/update-red-hat-virtio-drivers-of-windows-instances))
 - XEN ([XEN](https://xenproject.org/windows-pv-drivers/), [Citrix](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Upgrading_PV_drivers.html#win2008-citrix-upgrade), [AWS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/xen-drivers-overview.html))
@@ -403,7 +495,7 @@ Open File menu > Open Image File, select the iso to be installed to get the imag
 >
 > The solution is to update the system patches or manually install the `VCLibs` library <https://www.google.com/search?q=ltsc+wsappx>.
 
-#### Considerations for Installing Windows on ARM
+##### Considerations for Installing Windows on ARM
 
 Most ARM machines support installing Windows 11 24H2.
 
@@ -432,18 +524,18 @@ Log in to the server using Remote Desktop, open Device Manager, locate the graph
 
 </details>
 
-## Discussion
+### Discussion
 
 [![GitHub Issues](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bin456789/reinstall/issues)
 [![Telegram Group](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/reinstall_os)
 
-## How to Modify the Script for your own
+### How to Modify the Script for your own
 
 1. Fork this repository.
 2. Modify the `confhome` and `confhome_cn` at the beginning of `reinstall.sh` and `reinstall.bat`.
 3. Make changes to the other code.
 
-## Thanks
+### Thanks
 
 [![Github Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/bin456789)
 
@@ -451,3 +543,54 @@ Thanks to the following businesses for providing free servers.
 
 [![Oracle Cloud](https://github.com/bin456789/reinstall/assets/7548515/8b430ed4-8344-4f96-b4da-c2bda031cc90)](https://www.oracle.com/cloud/)
 [![DartNode](https://github.com/bin456789/reinstall/assets/7548515/435d6740-bcdd-4f3a-a196-2f60ae397f17)](https://dartnode.com/)
+
+---
+
+<a name="structure"></a>
+
+## Project Structure
+
+```text
+reinstall/
+├── reinstall.sh            # Linux installation entry point
+├── reinstall.bat           # Windows entry point
+├── trans.sh                # Installer and transition environment
+├── windows.xml             # Windows unattended installation
+└── ttys.sh                 # Terminal utilities
+```
+
+---
+
+<a name="documentation"></a>
+
+## Documentation
+
+- [Complete Usage Guide](#usage-guide)
+
+---
+
+<a name="contributing"></a>
+
+## Contributing
+
+When reporting an issue, include the OS, version, reproduction steps, expected behavior and redacted logs. Check the relevant guidance and implementation, and run validation appropriate to your change.
+
+For upstream features and releases, use the original project links retained above.
+
+---
+
+<a name="license"></a>
+
+## License and Attribution
+
+See [GPL-3.0](LICENSE) for the license.
+
+<div align="center">
+
+### Project Activity
+
+[![Star History](https://api.star-history.com/svg?repos=langesmesser/reinstall&type=Date)](https://www.star-history.com/#langesmesser/reinstall&Date)
+
+[Contributors](https://github.com/langesmesser/reinstall/graphs/contributors)
+
+</div>

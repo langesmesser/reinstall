@@ -1,6 +1,99 @@
-<!-- markdownlint-disable MD028 MD033 MD045 -->
+<div align="center">
 
 # reinstall
+
+**Rebuild systems, keep the steps visible.**  
+*重装系统，让每一步都清晰可见。*
+
+![Shell](https://img.shields.io/badge/Stack-Shell-3178C6?style=flat-square)
+![Windows](https://img.shields.io/badge/Stack-Windows-339933?style=flat-square)
+![Linux](https://img.shields.io/badge/Stack-Linux-8A2BE2?style=flat-square)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square)](LICENSE)
+
+<p align="center">
+  <a href="#features">核心特性</a> •
+  <a href="#quick-start">快速上手</a> •
+  <a href="#workflow">工作流程</a> •
+  <a href="#structure">项目结构</a> •
+  <a href="#documentation">文档导航</a>
+</p>
+
+[English](README.en.md) · [简体中文](README.md)
+
+[仓库主页](https://github.com/langesmesser/reinstall)
+
+</div>
+
+---
+
+<a name="overview"></a>
+
+## 项目简介
+
+面向服务器与 VPS 的系统重装脚本，提供 Linux 安装、镜像 DD、Windows ISO 安装以及 Alpine 与 netboot.xyz 救援入口。
+
+本仓库是 [bin456789/reinstall](https://github.com/bin456789/reinstall) 的 Fork。下方保留本分支现有指南与原作者来源；上游发行内容不等同于本分支构建产物。
+
+> 重装或 DD 会覆盖目标磁盘数据。先备份，并确认云平台控制台与救援入口可用；不支持 OpenVZ / LXC。
+
+---
+
+<a name="features"></a>
+
+## 核心特性
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>跨系统重装</h3>
+      <p>现有脚本覆盖 Linux 与 Windows 之间的安装路径。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>网络适配</h3>
+      <p>包含动静态网络、IPv6 与特殊网关处理说明。</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>镜像与驱动</h3>
+      <p>提供镜像 DD、Windows ISO 与按需驱动安装流程。</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>救援与观察</h3>
+      <p>通过 Alpine、netboot.xyz、SSH、VNC 或串口观察与处理安装过程。</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+<a name="workflow"></a>
+
+## 工作流程
+
+```mermaid
+flowchart LR
+    n0["Select target system"] --> n1
+    n1["Validate requirements and back up"] --> n2
+    n2["Download installation resources"] --> n3
+    n3["Reboot into installer"] --> n4
+    n4["Install and reconnect"]
+```
+
+---
+
+<a name="quick-start"></a>
+
+## 快速上手
+
+按下方指南选择与你的系统、客户端或部署方式相符的入口。安装与发行地址沿用本分支现有说明。
+
+<a name="usage-guide"></a>
+
+## 完整使用指南
+
+<!-- markdownlint-disable MD028 MD033 MD045 -->
+
 
 [![Codacy](https://img.shields.io/codacy/grade/dc679a17751448628fe6d8ac35e26eed?logo=Codacy&label=Codacy&style=flat-square)](https://app.codacy.com/gh/bin456789/reinstall/dashboard)
 [![CodeFactor](https://img.shields.io/codefactor/grade/github/bin456789/reinstall?logo=CodeFactor&logoColor=white&label=CodeFactor&style=flat-square)](https://www.codefactor.io/repository/github/bin456789/reinstall)
@@ -12,7 +105,7 @@
 
 ![捐赠者](https://raw.githubusercontent.com/bin456789/sponsors/refs/heads/master/sponsors.svg)
 
-## 亮点
+### 亮点
 
 - 支持一键安装 Linux，可安装 17 种常见发行版
 - 支持一键安装 Windows，使用官方 ISO 安装而非自制镜像，脚本会自动获取 ISO 链接、自动安装 Virtio 等驱动
@@ -24,7 +117,7 @@
 - 不含自制包，所有资源均实时从镜像源获得
 - 有很多注释
 
-## 系统要求
+### 系统要求
 
 原系统可以是表格中的任意系统
 
@@ -60,7 +153,7 @@
 >
 > 请改用 <https://github.com/LloydAsp/OsMutation>
 
-## 下载（当前系统是 <img width="20" height="20" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux）
+### 下载（当前系统是 <img width="20" height="20" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux）
 
 国外服务器：
 
@@ -74,7 +167,7 @@ curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh 
 curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_
 ```
 
-## 下载（当前系统是 <img width="20" height="20" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows）
+### 下载（当前系统是 <img width="20" height="20" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows）
 
 > [!IMPORTANT]
 > 请先关闭 `Windows Defender` 的 `实时保护` 功能。该功能会阻止 `certutil` 下载任何文件。
@@ -83,7 +176,7 @@ curl -O https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reins
 
 <summary>😢还是无法下载？</summary>
 
-### 可尝试以下几种方法
+#### 可尝试以下几种方法
 
 1. Windows 7 安装此补丁启用 TLS 1.2
 
@@ -116,14 +209,14 @@ certutil -urlcache -f -split https://raw.githubusercontent.com/bin456789/reinsta
 certutil -urlcache -f -split https://www.ghproxy.cc/https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.bat
 ```
 
-## 使用
+### 使用
 
 **所有功能** 都可在 Linux / Windows 下运行
 
 - Linux 下运行 `bash reinstall.sh`
 - Windows 下运行 `.\reinstall.bat`
 
-### 功能 1: 安装 <img width="16" height="16" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux
+#### 功能 1: 安装 <img width="16" height="16" src="https://www.kernel.org/theme/images/logos/favicon.png" /> Linux
 
 - 用户名 `root` 默认密码 `123@@@`，首次开机可能要等几分钟才能成功登录
 - 安装最新版可不输入版本号
@@ -152,7 +245,7 @@ bash reinstall.sh centos      9
                   gentoo
 ```
 
-#### 可选参数
+##### 可选参数
 
 - `--password PASSWORD` 设置密码
 - `--ssh-port PORT` 修改 SSH 端口（安装期间观察日志用，也用于新系统）
@@ -197,7 +290,7 @@ bash reinstall.sh ubuntu --installer
 
 </details>
 
-### 功能 2: DD
+#### 功能 2: DD
 
 - 支持 `raw` `vhd` 格式的镜像（未压缩，或者压缩成 `.gz` `.xz` `.zst` `.tar` `.tar.gz` `.tar.xz` `.tar.zst`）
 - DD Windows 镜像时，会自动扩展系统盘，静态 IP 的机器会配置好 IP，可能首次开机几分钟后才生效
@@ -207,7 +300,7 @@ bash reinstall.sh ubuntu --installer
 bash reinstall.sh dd --img https://example.com/xxx.xz
 ```
 
-#### 可选参数
+##### 可选参数
 
 - `--allow-ping` 允许被 Ping (仅限 DD Windows)
 - `--rdp-port PORT` 修改 RDP 端口 (仅限 DD Windows)
@@ -219,7 +312,7 @@ bash reinstall.sh dd --img https://example.com/xxx.xz
 > 可通过多种方式（SSH、HTTP 80 端口、后台 VNC、串行控制台）查看安装进度。
 > <br />即使安装过程出错，也能通过 SSH 运行 `/trans.sh alpine` 安装到 Alpine。
 
-### 功能 3: 重启到 <img width="16" height="16" src="https://www.alpinelinux.org/alpine-logo.ico" /> Alpine Live OS（救援系统）
+#### 功能 3: 重启到 <img width="16" height="16" src="https://www.alpinelinux.org/alpine-logo.ico" /> Alpine Live OS（救援系统）
 
 - 可用 ssh 连接，进行备份/恢复硬盘、手动 DD、修改分区、手动安装 Alpine/Arch/Gentoo 等操作
 - 用户名 `root` 默认密码 `123@@@`
@@ -229,12 +322,12 @@ bash reinstall.sh dd --img https://example.com/xxx.xz
 bash reinstall.sh alpine --hold=1
 ```
 
-#### 可选参数
+##### 可选参数
 
 - `--password PASSWORD` 设置密码
 - `--ssh-port PORT` 修改 SSH 端口
 
-### 功能 4: 重启到 <img width="16" height="16" src="https://netboot.xyz/img/favicon.ico" /> netboot.xyz
+#### 功能 4: 重启到 <img width="16" height="16" src="https://netboot.xyz/img/favicon.ico" /> netboot.xyz
 
 - 可使用商家后台 VNC 手动安装 [更多系统](https://github.com/netbootxyz/netboot.xyz?tab=readme-ov-file#what-operating-systems-are-currently-available-on-netbootxyz)
 - 如果手动操作没有破坏原系统，再次重启将回到原系统
@@ -245,7 +338,7 @@ bash reinstall.sh netboot.xyz
 
 ![netboot.xyz](https://netboot.xyz/images/netboot.xyz.gif)
 
-### 功能 5: 安装 <img width="16" height="16" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows ISO
+#### 功能 5: 安装 <img width="16" height="16" src="https://blogs.windows.com/wp-content/uploads/prod/2022/09/cropped-Windows11IconTransparent512-32x32.png" /> Windows ISO
 
 ![Windows 安装界面](https://github.com/bin456789/reinstall/assets/7548515/07c1aea2-1ce3-4967-904f-aaf9d6eec3f7)
 
@@ -254,7 +347,7 @@ bash reinstall.sh netboot.xyz
 - 静态机器会自动配置好 IP，可能首次开机几分钟后才生效
 - 支持所有语言
 
-#### 支持的系统
+##### 支持的系统
 
 - Windows (Vista ~ 11)
 - Windows Server (2008 ~ 2025)
@@ -263,7 +356,7 @@ bash reinstall.sh netboot.xyz
   - Hyper-V Server \*
   - Azure Stack HCI \*
 
-#### 方法 1: 让脚本自动查找 ISO （推荐）
+##### 方法 1: 让脚本自动查找 ISO （推荐）
 
 - 通常情况下 Windows 每个月都会发布新的官方 ISO，集成了最新的系统补丁，避免了刚安装好系统就要下载一堆补丁
 - 脚本会从 <https://massgrave.dev/genuine-installation-media> 查找 ISO，该网站收录了每月发布的 ISO，因此脚本查找到的 ISO 都是官方最新版
@@ -322,7 +415,7 @@ zh-tw
 
 </details>
 
-#### 方法 2: 自行指定 ISO 连接
+##### 方法 2: 自行指定 ISO 连接
 
 - 如果不知道 `--image-name`，可以随便填，在重启后连接 SSH，根据错误提示重新输入正确的值
 
@@ -351,7 +444,7 @@ bash reinstall.sh windows \
 
 </details>
 
-#### 可选参数
+##### 可选参数
 
 - `--password PASSWORD` 设置密码
 - `--allow-ping` 允许被 Ping
@@ -360,7 +453,7 @@ bash reinstall.sh windows \
 - `--web-port PORT` 修改 Web 端口（安装期间观察日志用）
 - `--hold 2` 在进入 Windows 官方安装程序之前，可以 SSH 登录修改硬盘内容，硬盘挂载在 `/os`
 
-#### 如何填写映像名称 `--image-name`
+##### 如何填写映像名称 `--image-name`
 
 通常一个 ISO 会包含多个系统版本，例如家庭版、专业版。映像名称 `--image-name` 就是用来指定要安装的版本，填写时不区分大小写
 
@@ -375,13 +468,13 @@ Windows 11 Enterprise LTSC 2024
 Windows Server 2025 SERVERDATACENTER
 ```
 
-#### 如何用 [DISM++](https://github.com/Chuyu-Team/Dism-Multi-language/releases) 查询 ISO 包含的映像名称
+##### 如何用 [DISM++](https://github.com/Chuyu-Team/Dism-Multi-language/releases) 查询 ISO 包含的映像名称
 
 打开文件菜单 > 打开映像文件，选择要安装的 iso，即可得到映像名称，所有映像名称都可以安装
 
 ![image-name](https://github.com/bin456789/reinstall/assets/7548515/5aae0a9b-61e2-4f66-bb98-d470a6beaac2)
 
-#### 脚本会按需安装以下驱动
+##### 脚本会按需安装以下驱动
 
 - Virtio ([Virtio](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/)、[阿里云](https://www.alibabacloud.com/help/ecs/user-guide/update-red-hat-virtio-drivers-of-windows-instances))
 - XEN ([XEN](https://xenproject.org/windows-pv-drivers/)、[Citrix](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Upgrading_PV_drivers.html#win2008-citrix-upgrade)、[AWS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/xen-drivers-overview.html))
@@ -403,7 +496,7 @@ Windows Server 2025 SERVERDATACENTER
 >
 > 解决方法是更新系统补丁，或者手动安装 `VCLibs` 库 <https://www.google.com/search?q=ltsc+wsappx>
 
-#### ARM 安装 Windows 的注意事项
+##### ARM 安装 Windows 的注意事项
 
 大部分 ARM 机器都支持安装 Windows 11 24H2
 
@@ -432,18 +525,18 @@ Windows Server 2025 SERVERDATACENTER
 
 </details>
 
-## 讨论
+### 讨论
 
 [![GitHub Issues](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bin456789/reinstall/issues)
 [![Telegram Group](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/reinstall_os)
 
-## 如何修改脚本自用
+### 如何修改脚本自用
 
 1. Fork 本仓库
 2. 修改 `reinstall.sh` 和 `reinstall.bat` 开头的 `confhome` 和 `confhome_cn`
 3. 修改其它代码
 
-## 感谢
+### 感谢
 
 [![Github Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/bin456789)
 
@@ -451,3 +544,54 @@ Windows Server 2025 SERVERDATACENTER
 
 [![Oracle Cloud](https://github.com/bin456789/reinstall/assets/7548515/8b430ed4-8344-4f96-b4da-c2bda031cc90)](https://www.oracle.com/cloud/)
 [![DartNode](https://github.com/bin456789/reinstall/assets/7548515/435d6740-bcdd-4f3a-a196-2f60ae397f17)](https://dartnode.com/)
+
+---
+
+<a name="structure"></a>
+
+## 项目结构
+
+```text
+reinstall/
+├── reinstall.sh            # Linux 调度与安装入口
+├── reinstall.bat           # Windows 启动入口
+├── trans.sh                # 安装与过渡环境逻辑
+├── windows.xml             # Windows 自动安装配置
+└── ttys.sh                 # 终端处理工具
+```
+
+---
+
+<a name="documentation"></a>
+
+## 文档导航
+
+- [完整使用指南](#usage-guide)
+
+---
+
+<a name="contributing"></a>
+
+## 参与贡献
+
+反馈时请说明系统、版本、使用步骤、预期行为和脱敏日志。提交改动前核对相关指南与实际实现，并运行与改动有关的验证。
+
+有关上游功能和发行的问题，可通过上方原作者入口反馈。
+
+---
+
+<a name="license"></a>
+
+## 许可证与来源
+
+许可证见 [GPL-3.0](LICENSE)。
+
+<div align="center">
+
+### 项目活动
+
+[![Star History](https://api.star-history.com/svg?repos=langesmesser/reinstall&type=Date)](https://www.star-history.com/#langesmesser/reinstall&Date)
+
+[贡献记录](https://github.com/langesmesser/reinstall/graphs/contributors)
+
+</div>
